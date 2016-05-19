@@ -27,8 +27,12 @@ object test {
     val  word_path = "s3n://emojikeyboardlite/word/20160516/language=en_US/21_172.31.28.24_1463461307337_GMT_minus_0800"
 
     val data = sc.textFile(word_path)
+        .filter{x =>
+          x.split("\t").length >= 4
+
+        }
       .map { x =>
-        val item = x.split("/t")
+        val item = x.split("\t")
         val application = item(0)
         val word = item(1)
         val deviceuid = item(2)
