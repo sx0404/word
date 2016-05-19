@@ -49,7 +49,9 @@ object test {
 
         }
         (deviceuid,ip)
-      }
+      }.filter{case (deviceuid,ip)=>
+    if (ip == "") false else true
+    }
 
 
     val path = "hdfs:///sx/word/"
