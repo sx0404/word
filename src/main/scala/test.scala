@@ -24,22 +24,23 @@ object test {
 
     hadoopConf.set("fs.s3n.awsSecretAccessKey", awsSecretAccessKey)
 
-    val  word_path = "s3n://emojikeyboardlite/word/20160516/language=en_US/*"
+    val  word_path = "s3n://emojikeyboardlite/meta/20160517/metatab-r-00029"
 
     val data = sc.textFile(word_path)
-        .filter{x =>
-          x.split("\t").length >= 4
+      .filter { x =>
+        x.split("\t").length >= 16
 
-        }
+      }
       .map { x =>
         val item = x.split("\t")
-        val application = item(0)
-        val word = item(1)
-        val deviceuid = item(2)
-        val ts = item(3)
-        (application,1)
+        val deviceuid = item(1)
+        val extra = item(15)
+        (deviceuid, extra)
       }
-        .reduceByKey(_+_)
+      .map { x =>
+        val ip = x._2.split("&")(1)
+        (x._1,ip)
+      }
 
 
     val path = "hdfs:///sx/word/"
