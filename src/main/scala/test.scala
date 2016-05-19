@@ -11,6 +11,7 @@ import scala.collection.mutable.ArrayBuffer
 object test {
 
   def main(args:Array[String])={
+    println("11111111")
     val conf = new SparkConf()
     val sc = new SparkContext(conf)
     val hadoopConf = sc.hadoopConfiguration
@@ -38,5 +39,8 @@ object test {
       .sortBy(x =>
         x._2
       ).collect()
+  for(elem <- data){
+    println(elem._1._2+" this is word")
+  }
   }
 }
