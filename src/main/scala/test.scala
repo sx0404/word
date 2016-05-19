@@ -37,14 +37,20 @@ object test {
         val word = item(1)
         val deviceuid = item(2)
         val ts = item(3)
-        ((application,word,deviceuid),ts)
+        ((application,deviceuid),(ts,word))
       }
-        .groupByKey()
-      .sortBy(x =>
-        x._2
-      ).collect()
-  for(elem <- data){
-    println(elem._1._1+"..." +elem._1._2+"..." +elem._1._3+"..." +elem._2+"..." +" this is word")
-  }
+      .groupByKey()//((application, deviceuid), iter((ts,word)))
+      .map{case ((application, duid), x) =>
+        val haha = x.toArray.sortBy(x => x._1)
+
+      (application,duid, haha.mkString("\t") )
+
+    }
+
+
+    val path = "hdfs:///sx/word/"
+    HDFS.removeFile(path)
+
+    data.repartition(1).saveAsTextFile(path)
   }
 }
