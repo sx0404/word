@@ -38,7 +38,7 @@ object test {
         (deviceuid, extra)
       }
       .map { x =>
-        val ip = x._2.split("&")(1)
+        val ip = x._2.split("&")(0)
         (x._1,ip)
       }
 
