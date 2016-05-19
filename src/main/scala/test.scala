@@ -33,13 +33,22 @@ object test {
       }
       .map { x =>
         val item = x.split("\t")
-        val deviceuid = item(1)
+        val deviceuid = item(0)
         val extra = item(15)
         (deviceuid, extra)
       }
-      .map { x =>
-        val ip = x._2.split("&")(0)
-        (x._1,ip)
+      .map { case  (deviceuid, extra) =>
+        val item = extra.split("&")
+        var ip =""
+        for(elem <- item)
+        {
+          val k = elem.split("\t")
+          if (k(0) == "ip") {
+            ip = k(1)
+          }
+
+        }
+        (deviceuid,ip)
       }
 
 
