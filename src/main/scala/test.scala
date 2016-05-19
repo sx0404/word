@@ -39,10 +39,10 @@ object test {
       }
       .map { case  (deviceuid, extra) =>
         val item = extra.split("&")
-        var ip =""
+        var ip = ""
         for(elem <- item)
         {
-          val k = elem.split("\t")
+          val k = elem.split("=")
           if (k(0) == "ip") {
             ip = k(1)
           }
