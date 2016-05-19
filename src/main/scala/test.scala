@@ -44,7 +44,7 @@ object test {
         x._2
       ).collect()
   for(elem <- data){
-    println(elem._1._1+elem._1._2+elem._1._3+elem._2+" this is word")
+    println(elem._1._1+"////" +elem._1._2+"////" +elem._1._3+elem._2+"////" +" this is word")
   }
   }
 }
