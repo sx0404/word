@@ -24,7 +24,7 @@ object test {
 
     hadoopConf.set("fs.s3n.awsSecretAccessKey", awsSecretAccessKey)
 
-    val  word_path = "s3://emojikeyboardlite/word/20160516/language=en_US/21_172.31.28.24_1463461307337_GMT_minus_0800"
+    val  word_path = "s3n://emojikeyboardlite/word/20160516/language=en_US/21_172.31.28.24_1463461307337_GMT_minus_0800"
 
     val data = sc.textFile(word_path)
       .map { x =>
